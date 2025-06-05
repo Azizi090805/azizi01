@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>practice.html</title>
+</head>
+<body>
+
+  <button onclick="showTotal()">購物車總額</button>
+  <button onclick="clearCart()">清空購物車</button>
+
+  <br><br>
+
+  <img src="https://down-my.img.susercontent.com/file/2c841092265e6e03699697794bc5d32d" alt="蔥燒牛肉麵" width="200">
+  <p>$100</p>
+  <button onclick="addToCart(100)">加入購物車</button>
+
+  <br><br>
+
+  <img src="https://m.media-amazon.com/images/I/71B4YNvwCtL.jpg" alt="印尼炒麵" width="200">
+  <p>$120</p>
+  <button onclick="addToCart(120)">加入購物車</button>
+
+  <br><br>
+
+  <p>目前購物車金額：<span id="total">0</span> 元</p>
+
+  <script>
+    let total = 0;
+
+    window.onload = () => {
+      const saved = localStorage.getItem("cartTotal");
+      if (saved) {
+        total = parseInt(saved);
+        document.getElementById("total").textContent = total;
+      }
+    };
+
+    function addToCart(price) {
+      total += price;
+      document.getElementById("total").textContent = total;
+      localStorage.setItem("cartTotal", total);
+      console.log("目前總金額：" + total + " 元");
+    }
+
+    function showTotal() {
+      alert("目前購物車總金額為：" + total + " 元");
+    }
+
+    function clearCart() {
+      total = 0;
+      document.getElementById("total").textContent = total;
+      localStorage.removeItem("cartTotal");
+      console.log("購物車已清空");
+    }
+  </script>
+
+</body>
+</html>
